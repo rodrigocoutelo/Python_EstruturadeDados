@@ -8,4 +8,5 @@ class Point(object):
     surface: surface
 
 
+
   def follow_course(self, area, point):Point
