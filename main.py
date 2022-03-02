@@ -1,87 +1,107 @@
-class Point(object):
-
-  def __init__(self, line, column, value=None):
-    self.line = line
-    self.column = column
-    self.value = value
-    # print("linha: ",line,"coluna:", column)
-
-  def is_River(self, area):
-    if area[self.line][self.column] == 1:
-      return True
-
-    return False
+import re
+from pyparsing import col
 
 
-
+#matrix = [
+#     #0  1  2  3  4
+#     [1, 0, 1, 0, 0],#0
+#     [1, 0, 1, 0, 0],#1
+#     [0, 1, 1, 1, 1],#2
+#     [0, 0, 1, 0, 0],#3
+#     [0, 0, 1, 0, 0],#4
+# ]
 
 matrix = [
-    [1, 0, 0, 1, 0],
-    [1, 0, 1, 0, 0],
-    [0, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1],
-    [1, 0, 1, 1, 0],
+  [1,0,0,1,1],
+  [1,1,0,0,0],
+  [0,0,0,0,1],
+  [1,1,0,0,0]
 ]
 
-result = []
+number_of_lines = len(matrix)
+number_of_columns = len(matrix[0])
 already_checked = []
-rivers_point = []
-lands_point = []
-river_size = 0
+already_checked_i = []
+result = []
+result_i = []
 
+def is_River(line, column, size_course=0):
+
+  if [line, column] not in already_checked:
+   # print("Checando","Linha:", line, "Coluna:", column, "Valor", matrix[line][column])
+    already_checked.append([line, column])
+    if matrix[line][column] == 1:
+      matrix[line][column] = "R"
+      size_course += 1
+      size_course = check_course(line,column,size_course)
+
+
+  return size_course
+
+def is_Island(line, column, size_land=0):
+
+  if [line, column] not in already_checked_i:
+   # print("Checando","Linha:", line, "Coluna:", column, "Valor", matrix[line][column])
+    already_checked_i.append([line, column])
+    if matrix[line][column] == 0:
+      matrix[line][column] = "L"
+      size_land += 1
+      size_land = check_land(line,column,size_land)
+
+
+  return size_land
+
+def check_land(line,column,current_size_land):
+  #up
+  if line > 0:
+    current_size_land =  is_Island(line-1, column,current_size_land)
+  #down
+  if line < number_of_lines-1:
+    current_size_land = is_Island(line+1, column,current_size_land)
+
+  #left
+  if column > 0:
+    current_size_land = is_Island(line, column-1,current_size_land)
+
+  #right
+  if column < number_of_columns-1:
+    current_size_land = is_Island(line, column+1,current_size_land)
+
+  return current_size_land
+
+def check_course(line,column,current_size_course):
+  #up
+  if line > 0:
+    current_size_course =  is_River(line-1, column,current_size_course)
+  #down
+  if line < number_of_lines-1:
+    current_size_course = is_River(line+1, column,current_size_course)
+
+  #left
+  if column > 0:
+    current_size_course = is_River(line, column-1,current_size_course)
+
+  #right
+  if column < number_of_columns-1:
+    current_size_course = is_River(line, column+1,current_size_course)
+
+  return current_size_course
 
 if len(matrix) > 0:
-  number_of_lines = len(matrix)
-  number_of_columns = len(matrix[0])
-  line = 0
-  column = 0
+  for i in range(0, len(matrix)):
+    for j in range(0, len(matrix[i])):
+      if matrix[i][j] == 1:
+        retorno = is_River(i,j)
+        result.append(retorno)
+      elif matrix[i][j] == 0:
+        retorno = is_Island(i,j)
+        result_i.append(retorno)
 
-  while True:
-    point = Point(line, column)
-    if point not in already_checked:
-      if point.is_River(matrix):
-        already_checked.append(point)
-        rivers_point.append(point)
-        river_size += 1
-        next_column = column + 1
-        while point.is_River(matrix) and next_column <= number_of_columns -1:
-          point = Point(line, next_column)
-          already_checked.append(point)
-          if point.is_River(matrix):
-            rivers_point.append(point)
-            river_size += 1
-            next_column += 1
-          else:
-            lands_point.append(point)
-            next_line = line + 1
-      while point.is_River(matrix) and next_line <= number_of_lines - 1:
-        point = Point(next_line, column)
-        already_checked.append(point)
-        if point.is_River(matrix):
-          rivers_point.append(point)
-          river_size += 1
-          next_line += 1
-        else:
-          lands_point.append(point)
-      else:
-        already_checked.append(point)
-        lands_point.append(point)
-    if line == number_of_lines-1 and column == number_of_columns-1:
-      break
-    elif line < number_of_lines-1 and column == number_of_columns-1:
-      line += 1
-      column = 0
-    else:
-      column += 1
+  result.sort()
+  result_i.sort()
+  print("Rios", result)
+  print("Ilhas", result_i)
 
-print(result)
-print("Rios")
-for r in rivers_point:
-  print(r.line, r.column)
 
-print("Terras")
-for l in lands_point:
-  print(l.line, l.column)
 
-print("Resultado:", result)
 
