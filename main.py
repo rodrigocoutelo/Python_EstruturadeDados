@@ -12,20 +12,23 @@ rivers_point = []
 lands_point = []
 river_size = 0
 
-for line in range(len(matrix)):
-  for column in range(len(matrix[line])):
-      if matrix[line][column] == 1:
-        rivers_point.append([line,column])
-      else:
-        lands_point.append([line,column])
 
-print(rivers_point)
-print(lands_point)
+if len(matrix) > 0:
+  number_of_lines = len(matrix)
+  number_of_columns = len(matrix[0])
+  read_line = 0
+  read_column = 0
 
+  while True:
+    print(matrix[read_line][read_column])
 
+    if read_line == number_of_lines-1 and read_column == number_of_columns-1:
+      break
+    elif read_line < number_of_lines-1 and read_column == number_of_columns-1:
+      print("mudou de linha")
+      read_line += 1
+      read_column = 0
+    else:
+      print("mudou de coluna")
+      read_column += 1
 
-def isRiver(line, column, area):
-  if area[line][column] == 1:
-    return True
-
-  return False
