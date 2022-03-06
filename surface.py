@@ -8,10 +8,8 @@ class Surface(object):
   def __init__(self, matrix):
     if len(matrix) <= 0:
       raise Exception("Matrix inválida")
-
     self.matrix = matrix
-    self.number_of_lines = len(matrix)
-    self.number_of_columns = len(matrix[0])
+
 
   def find_surface_by_type(self, surface_type:SurfaceType):
     matrix = deepcopy(self.matrix)
