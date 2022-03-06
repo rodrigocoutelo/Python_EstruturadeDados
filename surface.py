@@ -19,42 +19,42 @@ class Surface(object):
 
   def search_on_surface(self, matrix, surface_type):
     result = []
-    size_of_area = 0
+    extension_of_area = 0
     for line in range(0, len(matrix)):
       if surface_type.code in (matrix[line]):
         for column in range(0, len(matrix[line])): #Numeros Colunas - 1
           point = Point(matrix, line, column)
           if point.get_point() == surface_type.code:
             start_point = point
-            size_of_area = self.is_surface_of_type(start_point,surface_type)
-            result.append(size_of_area)
+            extension_of_area = self.is_surface_of_type(start_point,surface_type)
+            result.append(extension_of_area)
             result.sort()
     return result
 
-  def is_surface_of_type(self, point:Point, surface_type:SurfaceType, size_of_area=0):
+  def is_surface_of_type(self, point:Point, surface_type:SurfaceType, extension_of_area=0):
     if point.get_point() == surface_type.code:
       point.set_point(surface_type.legend)
-      size_of_area += 1
-      size_of_area = self.check_extension(point,surface_type,size_of_area)
-    return size_of_area
+      extension_of_area += 1
+      extension_of_area = self.check_extension(point,surface_type,extension_of_area)
+    return extension_of_area
 
-  def check_extension(self, point:Point,surface_type,current_size_of_area):
+  def check_extension(self, point:Point,surface_type,current_extension_of_area):
     #up
     if not point.is_in_first_line:
-      current_size_of_area =  self.is_surface_of_type(point.move_up(),surface_type, current_size_of_area)
+      current_extension_of_area =  self.is_surface_of_type(point.move_up(),surface_type, current_extension_of_area)
 
     #down
     if not point.is_in_last_line:
-      current_size_of_area = self.is_surface_of_type(point.move_down(),surface_type, current_size_of_area)
+      current_extension_of_area = self.is_surface_of_type(point.move_down(),surface_type, current_extension_of_area)
 
     #left
     if not point.is_in_first_column:
-      current_size_of_area = self.is_surface_of_type(point.move_left(),surface_type, current_size_of_area)
+      current_extension_of_area = self.is_surface_of_type(point.move_left(),surface_type, current_extension_of_area)
 
     #right
     if not point.is_in_last_column:
-      current_size_of_area = self.is_surface_of_type(point.move_right(),surface_type, current_size_of_area)
+      current_extension_of_area = self.is_surface_of_type(point.move_right(),surface_type, current_extension_of_area)
 
-    return current_size_of_area
+    return current_extension_of_area
 
 
