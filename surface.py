@@ -35,10 +35,10 @@ class Surface(object):
     if point.get_point() == surface_type.code:
       point.set_point(surface_type.legend)
       size_of_area += 1
-      size_of_area = self.check_course(point,surface_type,size_of_area)
+      size_of_area = self.check_extension(point,surface_type,size_of_area)
     return size_of_area
 
-  def check_course(self, point:Point,surface_type,current_size_of_area):
+  def check_extension(self, point:Point,surface_type,current_size_of_area):
     #up
     if not point.is_in_first_line:
       current_size_of_area =  self.is_surface(point.move_up(),surface_type, current_size_of_area)
