@@ -19,9 +19,9 @@ class Surface(object):
     result = []
     extension_of_area = 0
     for line in range(0, len(matrix)):
-      if surface_type.code in (matrix[line]):
-        for column in range(0, len(matrix[line])): #Numeros Colunas - 1
-          point = Point(matrix, line, column)
+      if surface_type.code in (matrix[line]): #sá busca se a linha tiver alguma superfície do tipo procurado
+        for column in range(0, len(matrix[line])):
+          point = Point(matrix, line, column) # transforma toda a matriz em um objeto da classe Point
           if point.get_point() == surface_type.code:
             start_point = point
             extension_of_area = self.is_surface_of_type(start_point,surface_type)
