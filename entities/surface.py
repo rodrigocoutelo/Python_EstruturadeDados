@@ -1,6 +1,6 @@
 from copy import deepcopy
-from surface_type import SurfaceType
-from point import Point
+from entities.surface_type import SurfaceType
+from entities.point import Point
 
 
 class Surface(object):

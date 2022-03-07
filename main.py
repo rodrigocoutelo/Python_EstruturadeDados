@@ -1,5 +1,5 @@
-from surface_type import SurfaceType
-from surface import Surface
+from entities import Surface, SurfaceType
+
 
 rio = SurfaceType("Rio", 1, "R")
 terra = SurfaceType("Terra", 0, "A")
