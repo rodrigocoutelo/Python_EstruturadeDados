@@ -48,7 +48,6 @@ for s in surfaces_types:
 
   print("\nSaída Simples")
   print(f"{s.name}: {lenght_of_surface}")
-  print(matrix)
 
 
 

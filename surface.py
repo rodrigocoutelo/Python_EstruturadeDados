@@ -20,7 +20,7 @@ class Surface(object):
         if len(surface_points) > 0:
           surface_grafo = []
           for p in surface_points:
-            surface_grafo.append(point.get_grafo(self.surface_type, surface_points))
+            surface_grafo.append(p.get_grafo(self.surface_type, surface_points))
 
           self.points_of_surfaces.append(surface_points)
           self.surface_grafos.append(surface_grafo)
