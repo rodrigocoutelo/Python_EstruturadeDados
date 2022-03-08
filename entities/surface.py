@@ -6,7 +6,7 @@ from entities.point import Point
 class Surface(object):
 
   def __init__(self, matrix):
-    if len(matrix) <= 0:
+    if len(matrix) == 0:
       raise Exception("Matrix inválida")
     self.matrix = matrix
 
@@ -19,7 +19,7 @@ class Surface(object):
     result = []
     extension_of_area = 0
     for line in range(0, len(matrix)):
-      if surface_type.code in (matrix[line]): #sá busca se a linha tiver alguma superfície do tipo procurado
+      if surface_type.code in (matrix[line]): #só segue para busca se a linha tiver alguma superfície do tipo procurado
         for column in range(0, len(matrix[line])):
           point = Point(matrix, line, column) # transforma toda a matriz em um objeto da classe Point
           if point.get_point() == surface_type.code:
