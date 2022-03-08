@@ -19,13 +19,27 @@ class Point(object):
   def get_value(self):
     return self.matrix[self.linha][self.coluna]
 
-  def get_index(self):
-    return self.indice
-
-
   def set_value(self, value):
     self.matrix[self.linha][self.coluna] = value
 
+  def get_index(self):
+    return self.indice
+
+  def move_up(self):
+    if not self.isFirstLine:
+      return Point(self.matrix, self.linha - 1, self.coluna)
+
+  def move_down(self,):
+    if not self.isLastLine:
+      return Point(self.matrix, self.linha + 1, self.coluna)
+
+  def move_left(self):
+    if not self.isFirstColumn:
+      return Point(self.matrix, self.linha, self.coluna - 1)
+
+  def move_right(self):
+    if not self.isLastColumn:
+      return Point(self.matrix, self.linha, self.coluna + 1)
 
   def scan_by_value(self, surface_type, matched):
     if self.get_value() == surface_type.code:
@@ -66,18 +80,4 @@ class Point(object):
   def equals(self, point):
     return self.matrix == point.matrix and self.linha == point.linha and self.coluna == point.coluna
 
-  def move_up(self):
-    if not self.isFirstLine:
-      return Point(self.matrix, self.linha - 1, self.coluna)
 
-  def move_down(self,):
-    if not self.isLastLine:
-      return Point(self.matrix, self.linha + 1, self.coluna)
-
-  def move_left(self):
-    if not self.isFirstColumn:
-      return Point(self.matrix, self.linha, self.coluna - 1)
-
-  def move_right(self):
-    if not self.isLastColumn:
-      return Point(self.matrix, self.linha, self.coluna + 1)
