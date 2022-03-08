@@ -4,3 +4,6 @@ class SurfaceType(object):
     self.name = name
     self.code = code
     self.legend = legend
+
+  def __repr__(self):
+    return f"[{self.name} | Código: {self.code} | Label:{self.legend}]"
