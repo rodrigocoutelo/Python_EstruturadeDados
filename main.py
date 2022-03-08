@@ -19,7 +19,7 @@ if matrix is None:
   [0,0,1,0,0],
  ]
 
-#Usa os dados defaul se os parâmetros não vierem da linha de comando.
+#Usa dados defaults se os parâmetros não vierem da linha de comando.
 if not area_to_search is None:
   surfaces_types = [area_to_search]
 else:
@@ -29,13 +29,12 @@ else:
   rocha = SurfaceType("Rochas", 3, "H")
   surfaces_types = [rio, terra, vegatacao, rocha]
 
-print("Análise de superfíce")
-print(f"Superfícies analisada(s): {surfaces_types}")
+print("Análise da superfíce")
+print(f"Tipos de superfícies analisada(s): {surfaces_types}")
 
 for s in surfaces_types:
   surface = Surface(matrix, s)
   surface.scan_by_surface_type()
-  print()
   print (f"\nQuantidade de áreas de {s.name}: {len(surface.points_of_surfaces)} área(s)")
   lenght_of_surface = []
   cont = 1

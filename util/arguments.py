@@ -1,6 +1,5 @@
 import sys
 import ast
-
 from entities.surface_type import SurfaceType
 
 def getArgs():

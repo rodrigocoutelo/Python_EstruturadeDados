@@ -41,12 +41,26 @@ class Point(object):
     if not self.isLastColumn:
       return Point(self.matrix, self.linha, self.coluna + 1)
 
+  def equals(self, point):
+    return self.matrix == point.matrix and self.linha == point.linha and self.coluna == point.coluna
+
   def scan_by_value(self, surface_type, matched):
     if self.get_value() == surface_type.code:
       self.indice = len(matched)
       matched.append(self)
       self.set_value(surface_type.legend)
       matched = self.get_adjacents(surface_type, matched)
+    return matched
+
+  def get_adjacents (self, surface_type, matched):
+    if self.move_up() != None:
+      matched = self.move_up().scan_by_value(surface_type, matched)
+    if self.move_down() != None:
+      matched = self.move_down().scan_by_value(surface_type, matched)
+    if self.move_left() != None:
+      matched = self.move_left().scan_by_value(surface_type, matched)
+    if self.move_right() != None:
+      matched = self.move_right().scan_by_value(surface_type, matched)
     return matched
 
   def get_grafo(self, surface_type, points_list):
@@ -66,18 +80,6 @@ class Point(object):
       if p.equals(point):
         return p.get_index()
 
-  def get_adjacents (self, surface_type, matched):
-    if self.move_up() != None:
-      matched = self.move_up().scan_by_value(surface_type, matched)
-    if self.move_down() != None:
-      matched = self.move_down().scan_by_value(surface_type, matched)
-    if self.move_left() != None:
-      matched = self.move_left().scan_by_value(surface_type, matched)
-    if self.move_right() != None:
-      matched = self.move_right().scan_by_value(surface_type, matched)
-    return matched
 
-  def equals(self, point):
-    return self.matrix == point.matrix and self.linha == point.linha and self.coluna == point.coluna
 
 
