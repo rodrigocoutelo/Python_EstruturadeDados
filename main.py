@@ -29,13 +29,13 @@ else:
   surfaces_types = [rio, terra, vegatacao, rocha]
 
 print("Análise de superfíce")
-print(f"Superfícies analisadas: {surfaces_types}")
+print(f"Superfícies analisada(s): {surfaces_types}")
 
 for s in surfaces_types:
   surface = Surface(matrix, s)
   surface.scan_by_surface_type()
   print()
-  print (f"\nQuantidade de áreas de {s.name}: {len(surface.points_of_surfaces)} áreas")
+  print (f"\nQuantidade de áreas de {s.name}: {len(surface.points_of_surfaces)} área(s)")
   lenght_of_surface = []
   cont = 1
   for st in surface.points_of_surfaces:
