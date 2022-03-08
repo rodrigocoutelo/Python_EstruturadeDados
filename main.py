@@ -1,6 +1,6 @@
-from arguments import getArgs
+from util.arguments import getArgs
 from entities.surface_type import SurfaceType
-from surface import Surface
+from entities.surface import Surface
 
 matrix, area_to_search = getArgs()
 
