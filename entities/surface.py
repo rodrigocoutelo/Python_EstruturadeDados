@@ -12,10 +12,10 @@ class Surface(object):
 
 
   def scan_by_surface_type(self):
-    for linha in range(len(self.points)):
-      for coluna in range(len(self.points[linha])):
+    for line in range(len(self.points)):
+      for column in range(len(self.points[line])):
         surface_points = []
-        point = Point(self.points, linha, coluna)
+        point = Point(self.points, line, column)
         surface_points = point.scan_by_value(self.surface_type,surface_points)
         if len(surface_points) > 0:
           surface_grafo = []
